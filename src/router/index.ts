@@ -10,6 +10,7 @@ export enum NomRoutes {
     ScreenOrientationApi = 'screen-orientation-api',
     BarcodeDetectionApi = 'barcode-detection-api',
     BroadcastChannelApi = 'broadcast-channel-api',
+    ResizeObserverApi = 'resize-observer-api',
 }
 
 const routes: Array<RouteRecordRaw> = [
@@ -80,6 +81,14 @@ const routes: Array<RouteRecordRaw> = [
         component: () =>
             import(
                 /* webpackChunkName: "/broadcast-channel-api" */ '../views/BroadcastChannelApi.vue'
+            ),
+    },
+    {
+        path: '/resize-observer-api',
+        name: NomRoutes.ResizeObserverApi,
+        component: () =>
+            import(
+                /* webpackChunkName: "/resize-observer-api" */ '../views/ResizeObserverApi.vue'
             ),
     },
 ];
