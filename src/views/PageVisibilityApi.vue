@@ -3,17 +3,22 @@
         <api-template-vue :title="title" :docUrl="docUrl" :useCases="useCases">
             <template v-slot:examples>
                 <div>
-                    <h3>
-                        La vidéo se met sur pause lorsque l'utilisateur change
-                        d'onglet et reprend lorsqu'il revient
-                    </h3>
+                    <h2 class="text-2xl font-semibold text-gray-900">
+                        Toggle play pause on video
+                    </h2>
                     <video
                         ref="videoElement"
                         src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                         controls
-                    >
-                        Le navigateur ne supporte pas les tags Video
-                    </video>
+                    ></video>
+                </div>
+                <div class="mt-12">
+                    <h2 class="text-2xl font-semibold text-gray-900">
+                        Start stop Interval
+                    </h2>
+                    <div ref="intervalElement">
+                        {{ count }}
+                    </div>
                 </div>
             </template>
         </api-template-vue>
@@ -23,7 +28,7 @@
 <script>
 import ApiTemplateVue from '@/components/ApiTemplate.vue';
 import { ref } from '@vue/reactivity';
-import { onMounted } from '@vue/runtime-core';
+import { onMounted, onUnmounted } from '@vue/runtime-core';
 
 const title = 'Page Visibility API';
 const docUrl =
@@ -48,19 +53,24 @@ export default {
     },
     setup() {
         const videoElement = ref(null);
+        const count = ref(0);
+        const hidden = 'hidden';
+        const visibilityChange = 'visibilitychange';
+        let interval;
+
+        function handleVisibilityChange() {
+            if (document[hidden]) {
+                videoElement.value.pause();
+                clearInterval(interval);
+            } else {
+                videoElement.value.play();
+                interval = setInterval(() => {
+                    count.value++;
+                }, 1000);
+            }
+        }
 
         onMounted(() => {
-            const hidden = 'hidden';
-            const visibilityChange = 'visibilitychange';
-
-            function handleVisibilityChange() {
-                if (document[hidden]) {
-                    videoElement.value.pause();
-                } else {
-                    videoElement.value.play();
-                }
-            }
-
             document.addEventListener(
                 visibilityChange,
                 handleVisibilityChange,
@@ -84,11 +94,19 @@ export default {
             );
         });
 
+        onUnmounted(() => {
+            document.removeEventListener(
+                visibilityChange,
+                handleVisibilityChange
+            );
+        });
+
         return {
             title,
             docUrl,
             useCases,
             videoElement,
+            count,
         };
     },
 };

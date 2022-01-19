@@ -31,7 +31,8 @@
                         elit. Dolore quos quod nemo error asperiores amet.
                     </p>
                     <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                        Lorem ipsum dolor sit, amet consectetur adipisicing
+                        elit.
                     </p>
                 </div>
             </div>

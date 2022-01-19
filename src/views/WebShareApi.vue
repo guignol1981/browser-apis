@@ -13,7 +13,7 @@
                     <button
                         type="button"
                         class="mt-2 inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        @click="share"
+                        @click="shareVideo"
                     >
                         <ShareIcon class="h-5 w-5" aria-hidden="true" />
                     </button>
@@ -51,6 +51,7 @@
                                         name="file-upload"
                                         type="file"
                                         class="sr-only"
+                                        @change="onFileChange"
                                     />
                                 </label>
                                 <p class="pl-1">or drag and drop</p>
@@ -60,10 +61,11 @@
                             </p>
                         </div>
                     </div>
+                    {{ file }}
                     <button
                         type="button"
                         class="mt-2 inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        @click="share"
+                        @click="shareFile"
                     >
                         <ShareIcon class="h-5 w-5" aria-hidden="true" />
                     </button>
@@ -85,6 +87,7 @@ const useCases = [
 ];
 
 import { ShareIcon } from '@heroicons/vue/outline/';
+import { ref } from '@vue/reactivity';
 
 export default {
     components: {
@@ -92,7 +95,9 @@ export default {
         ShareIcon,
     },
     setup() {
-        function share() {
+        const file = ref(null);
+
+        const shareVideo = () => {
             try {
                 navigator.share({
                     title: 'Une vidéo vraiment pas le fun!',
@@ -102,13 +107,32 @@ export default {
             } catch (err) {
                 console.error('Web Share failed: ', err);
             }
-        }
+        };
+
+        const shareFile = () => {
+            try {
+                navigator.share({
+                    files: [file.value],
+                    title: 'Le fichier que tu voulais!',
+                    text: 'voila le fichier',
+                });
+            } catch (err) {
+                console.error('Web Share failed: ', err);
+            }
+        };
+
+        const onFileChange = (event) => {
+            file.value = event.target.files[0];
+        };
 
         return {
             title,
             docUrl,
             useCases,
-            share,
+            file,
+            shareVideo,
+            shareFile,
+            onFileChange,
         };
     },
 };
