@@ -8,7 +8,7 @@
                         d'onglet et reprend lorsqu'il revient
                     </h3>
                     <video
-                        id="videoElement"
+                        ref="videoElement"
                         src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                         controls
                     >
@@ -22,6 +22,8 @@
 
 <script>
 import ApiTemplateVue from '@/components/ApiTemplate.vue';
+import { ref } from '@vue/reactivity';
+import { onMounted } from '@vue/runtime-core';
 
 const title = 'Page Visibility API';
 const docUrl =
@@ -45,58 +47,27 @@ export default {
         ApiTemplateVue,
     },
     setup() {
-        return {
-            title,
-            docUrl,
-            useCases,
-        };
-    },
-    mounted() {
-        // Set the name of the hidden property and the change event for visibility
-        var hidden, visibilityChange;
-        if (typeof document.hidden !== 'undefined') {
-            // Opera 12.10 and Firefox 18 and later support
-            hidden = 'hidden';
-            visibilityChange = 'visibilitychange';
-        } else if (typeof document.msHidden !== 'undefined') {
-            hidden = 'msHidden';
-            visibilityChange = 'msvisibilitychange';
-        } else if (typeof document.webkitHidden !== 'undefined') {
-            hidden = 'webkitHidden';
-            visibilityChange = 'webkitvisibilitychange';
-        }
+        const videoElement = ref(null);
 
-        var videoElement = document.getElementById('videoElement');
+        onMounted(() => {
+            const hidden = 'hidden';
+            const visibilityChange = 'visibilitychange';
 
-        // If the page is hidden, pause the video;
-        // if the page is shown, play the video
-        function handleVisibilityChange() {
-            if (document[hidden]) {
-                videoElement.pause();
-            } else {
-                videoElement.play();
+            function handleVisibilityChange() {
+                if (document[hidden]) {
+                    videoElement.value.pause();
+                } else {
+                    videoElement.value.play();
+                }
             }
-        }
 
-        // Warn if the browser doesn't support addEventListener or the Page Visibility API
-        if (
-            typeof document.addEventListener === 'undefined' ||
-            hidden === undefined
-        ) {
-            console.log(
-                'This demo requires a browser, such as Google Chrome or Firefox, that supports the Page Visibility API.'
-            );
-        } else {
-            // Handle page visibility change
             document.addEventListener(
                 visibilityChange,
                 handleVisibilityChange,
                 false
             );
 
-            // When the video pauses, set the title.
-            // This shows the paused
-            videoElement.addEventListener(
+            videoElement.value.addEventListener(
                 'pause',
                 function () {
                     document.title = 'Paused';
@@ -104,15 +75,21 @@ export default {
                 false
             );
 
-            // When the video plays, set the title.
-            videoElement.addEventListener(
+            videoElement.value.addEventListener(
                 'play',
                 function () {
                     document.title = 'Playing';
                 },
                 false
             );
-        }
+        });
+
+        return {
+            title,
+            docUrl,
+            useCases,
+            videoElement,
+        };
     },
 };
 </script>

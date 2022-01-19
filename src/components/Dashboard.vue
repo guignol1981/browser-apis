@@ -235,6 +235,10 @@ const navigation = [
         routeName: NomRoutes.BroadcastChannelApi,
     },
     {
+        name: 'Picture in Picture API',
+        routeName: NomRoutes.PictureInPictureApi,
+    },
+    {
         name: 'Screen Orientation API',
         routeName: NomRoutes.ScreenOrientationApi,
         icon: DeviceMobileIcon,
