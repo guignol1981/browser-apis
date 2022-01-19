@@ -52,7 +52,8 @@
 import ApiTemplateVue from '@/components/ApiTemplate.vue';
 
 const title = 'Resize Observer API';
-const docUrl = 'https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver/ResizeObserver';
+const docUrl =
+    'https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver/ResizeObserver';
 const useCases = [];
 
 export default {
@@ -60,10 +61,11 @@ export default {
         ApiTemplateVue,
     },
     data: () => ({
+        resizeObserver: null,
         dimensions: [],
     }),
     mounted() {
-        const resizeObserver = new ResizeObserver((entries) => {
+        this.resizeObserver = new ResizeObserver((entries) => {
             this.dimensions = entries.map((entry) => {
                 console.log('entry', entry);
                 return {
@@ -74,9 +76,13 @@ export default {
             });
         });
 
-        resizeObserver.observe(this.$refs.box1);
-        resizeObserver.observe(this.$refs.box2);
-        resizeObserver.observe(this.$refs.box3);
+        this.resizeObserver.observe(this.$refs.box1);
+        this.resizeObserver.observe(this.$refs.box2);
+        this.resizeObserver.observe(this.$refs.box3);
+    },
+    beforeUnmount() {
+        if (this.resizeObserver === null) return;
+        this.resizeObserver.disconnect();
     },
     setup() {
         return {
