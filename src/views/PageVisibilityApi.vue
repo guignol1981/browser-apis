@@ -58,7 +58,7 @@ export default {
         const visibilityChange = 'visibilitychange';
         let interval;
 
-        function handleVisibilityChange() {
+        const handleVisibilityChange = () => {
             if (document[hidden]) {
                 videoElement.value.pause();
                 clearInterval(interval);
@@ -68,15 +68,9 @@ export default {
                     count.value++;
                 }, 1000);
             }
-        }
+        };
 
         onMounted(() => {
-            document.addEventListener(
-                visibilityChange,
-                handleVisibilityChange,
-                false
-            );
-
             videoElement.value.addEventListener(
                 'pause',
                 function () {
@@ -90,6 +84,12 @@ export default {
                 function () {
                     document.title = 'Playing';
                 },
+                false
+            );
+
+            document.addEventListener(
+                visibilityChange,
+                handleVisibilityChange,
                 false
             );
         });
