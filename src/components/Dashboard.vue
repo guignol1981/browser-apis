@@ -231,6 +231,10 @@ const navigation = [
         routeName: NomRoutes.WebShareAPI,
     },
     {
+        name: 'Resize Obeserver API',
+        routeName: NomRoutes.ResizeObserverApi,
+    },
+    {
         name: 'Broadcast Channel API',
         routeName: NomRoutes.BroadcastChannelApi,
     },

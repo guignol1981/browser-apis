@@ -11,6 +11,7 @@ export enum NomRoutes {
     BarcodeDetectionApi = 'barcode-detection-api',
     BroadcastChannelApi = 'broadcast-channel-api',
     PictureInPictureApi = 'pip-api',
+    ResizeObserverApi = 'resize-observer-api',
 }
 
 const routes: Array<RouteRecordRaw> = [
@@ -89,6 +90,14 @@ const routes: Array<RouteRecordRaw> = [
         component: () =>
             import(
                 /* webpackChunkName: "/pip-api" */ '../views/PictureInPictureApi.vue'
+            ),
+    },
+    {
+        path: '/resize-observer-api',
+        name: NomRoutes.ResizeObserverApi,
+        component: () =>
+            import(
+                /* webpackChunkName: "/resize-observer-api" */ '../views/ResizeObserverApi.vue'
             ),
     },
 ];
