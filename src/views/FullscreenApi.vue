@@ -32,19 +32,21 @@ export default {
     components: {
         ApiTemplateVue,
     },
-    methods: {
-        requestFullscreen() {
-            document.getElementById('element').requestFullscreen();
-        },
-        exitFullscreen() {
-            document.exitFullscreen();
-        },
-    },
+
     setup() {
+        function requestFullscreen() {
+            document.getElementById('element').requestFullscreen();
+        }
+        function exitFullscreen() {
+            document.exitFullscreen();
+        }
+
         return {
             title,
             docUrl,
             useCases,
+            requestFullscreen,
+            exitFullscreen,
         };
     },
     mounted() {},

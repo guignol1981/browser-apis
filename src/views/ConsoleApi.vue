@@ -80,7 +80,6 @@ export default {
             exemples,
         };
     },
-    mounted() {},
 };
 </script>
 

@@ -50,9 +50,6 @@ export default {
             }
         },
     },
-    mounted() {
-        // Share must be triggered by "user activation"
-    },
 };
 </script>
 
