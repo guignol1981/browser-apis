@@ -62,11 +62,11 @@
                         <div class="mt-5 flex-1 h-0 overflow-y-auto">
                             <nav class="px-2 space-y-1">
                                 <a
-                                    v-for="item in navigation"
+                                    v-for="item in filteredNavigation"
                                     :key="item.name"
                                     href="#"
                                     :class="[
-                                        item.current
+                                        $route.name === item.routeName
                                             ? 'bg-indigo-800 text-white'
                                             : 'text-indigo-100 hover:bg-indigo-600',
                                         'group flex items-center px-2 py-2 text-base font-medium rounded-md',
@@ -106,11 +106,11 @@
                 <div class="mt-5 flex-1 flex flex-col">
                     <nav class="flex-1 px-2 pb-4 space-y-1">
                         <a
-                            v-for="item in navigation"
+                            v-for="item in filteredNavigation"
                             :key="item.name"
                             href="#"
                             :class="[
-                                item.current
+                                $route.name === item.routeName
                                     ? 'bg-indigo-800 text-white'
                                     : 'text-indigo-100 hover:bg-indigo-600',
                                 'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
@@ -167,8 +167,9 @@
                                     id="search-field"
                                     class="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"
                                     placeholder="Search"
-                                    type="search"
                                     name="search"
+                                    @keydown.enter.prevent="onSearch"
+                                    @input.prevent="onSearch"
                                 />
                             </div>
                         </form>
@@ -199,7 +200,12 @@ import {
     TransitionChild,
     TransitionRoot,
 } from '@headlessui/vue';
-import { BellIcon, MenuAlt2Icon, XIcon } from '@heroicons/vue/outline';
+import {
+    BellIcon,
+    MenuAlt2Icon,
+    XIcon,
+    DeviceMobileIcon,
+} from '@heroicons/vue/outline';
 import { SearchIcon } from '@heroicons/vue/solid';
 import { NomRoutes } from '@/router';
 
@@ -207,7 +213,32 @@ const navigation = [
     {
         name: 'Page Visibility API',
         routeName: NomRoutes.PageVisibilityAPI,
-        current: true,
+    },
+    {
+        name: 'Console API',
+        routeName: NomRoutes.ConsoleAPI,
+    },
+    {
+        name: 'Fullscreen API',
+        routeName: NomRoutes.FullscreenAPI,
+    },
+    {
+        name: 'Web Periodic Background Synchronization API',
+        routeName: NomRoutes.WebPeriodicBackgroundSynchronizationAPI,
+    },
+    {
+        name: 'Web Share API',
+        routeName: NomRoutes.WebShareAPI,
+    },
+    {
+        name: 'Screen Orientation API',
+        routeName: NomRoutes.ScreenOrientationApi,
+        icon: DeviceMobileIcon,
+    },
+    {
+        name: 'Barcode Detection API',
+        routeName: NomRoutes.BarcodeDetectionApi,
+        icon: DeviceMobileIcon,
     },
 ];
 
@@ -225,6 +256,22 @@ export default {
         MenuAlt2Icon,
         SearchIcon,
         XIcon,
+    },
+    data: () => ({
+        filter: '',
+    }),
+    methods: {
+        onSearch(event) {
+            this.filter = event.target.value;
+        },
+    },
+    computed: {
+        filteredNavigation() {
+            if (!this.filter) return navigation;
+            return navigation.filter((n) =>
+                n.name.toLowerCase().includes(this.filter.toLowerCase())
+            );
+        },
     },
     setup() {
         const sidebarOpen = ref(false);

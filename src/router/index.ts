@@ -3,6 +3,12 @@ import Home from '../views/Home.vue';
 
 export enum NomRoutes {
     PageVisibilityAPI = 'page-visibility-api',
+    ConsoleAPI = 'console-api',
+    FullscreenAPI = 'fullscreen-api',
+    WebPeriodicBackgroundSynchronizationAPI = 'wpbs-api',
+    WebShareAPI = 'web-share-api',
+    ScreenOrientationApi = 'screen-orientation-api',
+    BarcodeDetectionApi = 'barcode-detection-api',
 }
 
 const routes: Array<RouteRecordRaw> = [
@@ -17,6 +23,54 @@ const routes: Array<RouteRecordRaw> = [
         component: () =>
             import(
                 /* webpackChunkName: "page-visibility-api" */ '../views/PageVisibilityApi.vue'
+            ),
+    },
+    {
+        path: '/console-api',
+        name: NomRoutes.ConsoleAPI,
+        component: () =>
+            import(
+                /* webpackChunkName: "console-api" */ '../views/ConsoleApi.vue'
+            ),
+    },
+    {
+        path: '/fullscreen-api',
+        name: NomRoutes.FullscreenAPI,
+        component: () =>
+            import(
+                /* webpackChunkName: "fullscreen-api" */ '../views/FullscreenApi.vue'
+            ),
+    },
+    {
+        path: '/web-periodic-background-synchronization-api',
+        name: NomRoutes.WebPeriodicBackgroundSynchronizationAPI,
+        component: () =>
+            import(
+                /* webpackChunkName: "/web-periodic-background-synchronization-api" */ '../views/WebPeriodicBackgroundSynchronizationAPI.vue'
+            ),
+    },
+    {
+        path: '/web-share-api',
+        name: NomRoutes.WebShareAPI,
+        component: () =>
+            import(
+                /* webpackChunkName: "/web-share-api" */ '../views/WebShareApi.vue'
+            ),
+    },
+    {
+        path: '/screen-orientation-api',
+        name: NomRoutes.ScreenOrientationApi,
+        component: () =>
+            import(
+                /* webpackChunkName: "/screen-orientation-api" */ '../views/ScreenOrientationApi.vue'
+            ),
+    },
+    {
+        path: '/barcode-detection-api',
+        name: NomRoutes.BarcodeDetectionApi,
+        component: () =>
+            import(
+                /* webpackChunkName: "/barcode-detection-api" */ '../views/BarcodeDetectionApi.vue'
             ),
     },
 ];
