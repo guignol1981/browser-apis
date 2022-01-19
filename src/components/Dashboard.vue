@@ -55,7 +55,8 @@
                             </div>
                         </TransitionChild>
                         <div
-                            class="flex-shrink-0 flex items-center px-4 text-xl text-white"
+                            class="flex-shrink-0 flex items-center px-4 text-xl text-white cursor-pointer"
+                            @click="$router.push({ name: 'Home' })"
                         >
                             Browser APIs playground
                         </div>
@@ -99,7 +100,8 @@
                 class="flex flex-col flex-grow pt-5 bg-indigo-700 overflow-y-auto"
             >
                 <div
-                    class="flex items-center flex-shrink-0 px-4 text-xl text-white"
+                    class="flex items-center flex-shrink-0 px-4 text-xl text-white cursor-pointer"
+                    @click="$router.push({ name: 'Home' })"
                 >
                     Browser APIs playground
                 </div>
