@@ -2,6 +2,13 @@
     <div>
         <api-template-vue :title="title" :docUrl="docUrl" :useCases="useCases">
             <template v-slot:examples>
+                <div>
+                    <img
+                        id="barcode"
+                        src="@/assets/qr-code.png"
+                        alt="barcode"
+                    />
+                </div>
                 <div
                     class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
                 >
@@ -53,12 +60,32 @@ const docUrl =
 const useCases = [];
 // eslint-disable-next-line no-undef
 var barcodeDetector = new BarcodeDetector({
-    formats: ['code_39', 'codabar', 'ean_13'],
+    formats: ['code_39', 'codabar', 'ean_13', 'qr_code'],
 });
 
 export default {
     components: {
         ApiTemplateVue,
+    },
+    mounted() {
+        const img = document.getElementById('barcode');
+        function detect(img) {
+            barcodeDetector
+                .detect(img)
+                .then((barcodes) => {
+                    console.log(barcodes);
+                    barcodes.forEach((barcode) => console.log(barcode.rawData));
+                })
+                .catch((err) => {
+                    console.log('fail');
+                    console.log(err);
+                });
+        }
+        if (!img.complete) {
+            img.onload = () => detect(img);
+        } else {
+            detect(img);
+        }
     },
     setup() {
         function onFileChange(event) {
@@ -71,6 +98,7 @@ export default {
                     console.log(err);
                 });
         }
+
         return {
             title,
             docUrl,

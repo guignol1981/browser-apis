@@ -9,6 +9,7 @@ export enum NomRoutes {
     WebShareAPI = 'web-share-api',
     ScreenOrientationApi = 'screen-orientation-api',
     BarcodeDetectionApi = 'barcode-detection-api',
+    BroadcastChannelApi = 'broadcast-channel-api',
 }
 
 const routes: Array<RouteRecordRaw> = [
@@ -71,6 +72,14 @@ const routes: Array<RouteRecordRaw> = [
         component: () =>
             import(
                 /* webpackChunkName: "/barcode-detection-api" */ '../views/BarcodeDetectionApi.vue'
+            ),
+    },
+    {
+        path: '/broadcast-channel-api',
+        name: NomRoutes.BroadcastChannelApi,
+        component: () =>
+            import(
+                /* webpackChunkName: "/broadcast-channel-api" */ '../views/BroadcastChannelApi.vue'
             ),
     },
 ];

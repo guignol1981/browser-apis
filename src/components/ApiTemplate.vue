@@ -38,7 +38,7 @@ export default {
     props: {
         title: { type: String },
         docUrl: { type: String },
-        useCases: { type: [String] },
+        useCases: { type: Array },
     },
     setup() {},
 };

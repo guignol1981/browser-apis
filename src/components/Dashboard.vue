@@ -231,6 +231,10 @@ const navigation = [
         routeName: NomRoutes.WebShareAPI,
     },
     {
+        name: 'Broadcast Channel API',
+        routeName: NomRoutes.BroadcastChannelApi,
+    },
+    {
         name: 'Screen Orientation API',
         routeName: NomRoutes.ScreenOrientationApi,
         icon: DeviceMobileIcon,
