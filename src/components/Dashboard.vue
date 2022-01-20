@@ -229,6 +229,10 @@ const navigation = [
         routeName: NomRoutes.GeolocationApi,
     },
     {
+        name: 'Web Speech API',
+        routeName: NomRoutes.WebSpeechApi,
+    },
+    {
         name: 'Web Share API',
         routeName: NomRoutes.WebShareAPI,
     },

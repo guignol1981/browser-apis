@@ -13,6 +13,7 @@ export enum NomRoutes {
     PictureInPictureApi = 'pip-api',
     ResizeObserverApi = 'resize-observer-api',
     GeolocationApi = 'geolocation-api',
+    WebSpeechApi = 'web-speech-api',
 }
 
 const routes: Array<RouteRecordRaw> = [
@@ -107,6 +108,14 @@ const routes: Array<RouteRecordRaw> = [
         component: () =>
             import(
                 /* webpackChunkName: "/geolocation-api" */ '../views/GeolocationApi.vue'
+            ),
+    },
+    {
+        path: '/web-speech-api',
+        name: NomRoutes.WebSpeechApi,
+        component: () =>
+            import(
+                /* webpackChunkName: "/web-speech-api" */ '../views/WebSpeechApi.vue'
             ),
     },
 ];

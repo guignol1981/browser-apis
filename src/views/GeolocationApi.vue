@@ -17,7 +17,7 @@
 
 <script>
 import ApiTemplateVue from '@/components/ApiTemplate.vue';
-import { onMounted, reactive, toRefs } from '@vue/runtime-core';
+import { reactive, toRefs } from '@vue/runtime-core';
 import { GoogleMap, Marker } from 'vue3-google-map';
 
 const title = 'Geolocation API';
@@ -47,9 +47,6 @@ export default {
             center.lat = res.coords.latitude;
             center.lng = res.coords.longitude;
         });
-
-        onMounted(() => {});
-
         return {
             title,
             docUrl,
