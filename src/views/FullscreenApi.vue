@@ -311,7 +311,6 @@ export default {
             exitFullscreen,
         };
     },
-    mounted() {},
 };
 </script>
 

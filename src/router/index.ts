@@ -12,6 +12,7 @@ export enum NomRoutes {
     BroadcastChannelApi = 'broadcast-channel-api',
     PictureInPictureApi = 'pip-api',
     ResizeObserverApi = 'resize-observer-api',
+    GeolocationApi = 'geolocation-api',
 }
 
 const routes: Array<RouteRecordRaw> = [
@@ -98,6 +99,14 @@ const routes: Array<RouteRecordRaw> = [
         component: () =>
             import(
                 /* webpackChunkName: "/resize-observer-api" */ '../views/ResizeObserverApi.vue'
+            ),
+    },
+    {
+        path: '/geolocation-api',
+        name: NomRoutes.GeolocationApi,
+        component: () =>
+            import(
+                /* webpackChunkName: "/geolocation-api" */ '../views/GeolocationApi.vue'
             ),
     },
 ];

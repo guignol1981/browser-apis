@@ -225,8 +225,8 @@ const navigation = [
         routeName: NomRoutes.FullscreenAPI,
     },
     {
-        name: 'Web Periodic Background Synchronization API',
-        routeName: NomRoutes.WebPeriodicBackgroundSynchronizationAPI,
+        name: 'Geolocation API',
+        routeName: NomRoutes.GeolocationApi,
     },
     {
         name: 'Web Share API',

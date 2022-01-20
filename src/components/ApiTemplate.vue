@@ -4,7 +4,7 @@
             {{ title }}
         </h2>
         <div class="text-blue-800 mt-3 underline">
-            <a :href="docUrl" target="_blank">documentation officielle</a>
+            <a :href="docUrl" target="_blank">documentation</a>
         </div>
         <div class="mt-12">
             <h2 class="text-xl font-semibold text-gray-900">

@@ -2,21 +2,22 @@
     <div>
         <api-template-vue :title="title" :docUrl="docUrl" :useCases="useCases">
             <template v-slot:examples>
-                <button
-                    id="lockButton"
-                    type="button"
-                    class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    @click="rotate"
-                >
-                    Lock
-                </button>
-                <button
-                    type="button"
-                    class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    @click="unlock"
-                >
-                    Unlock
-                </button>
+                <div class="space-x-2">
+                    <button
+                        id="lockButton"
+                        type="button"
+                        class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        @click="rotate"
+                    >
+                        Lock
+                    </button>
+                    <button
+                        type="button"
+                        class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                        Unlock
+                    </button>
+                </div>
             </template>
         </api-template-vue>
     </div>
