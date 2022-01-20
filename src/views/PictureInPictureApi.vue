@@ -2,30 +2,34 @@
     <div>
         <api-template-vue :title="title" :docUrl="docUrl" :useCases="useCases">
             <template v-slot:examples>
-                <h2 class="text-2xl font-semibold text-gray-900">
-                    Avec bouton
-                </h2>
-                <video
-                    ref="videoElement1"
-                    src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                    controls
-                />
-                <button
-                    type="button"
-                    class="mt-3 inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    @click="togglePictureInPicture"
-                >
-                    Toggle Picture in picture
-                </button>
-                <h2 class="mt-12 text-2xl font-semibold text-gray-900">
-                    Auto Picture in Picture
-                </h2>
-                <video
-                    ref="videoElement2"
-                    src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                    controls
-                    autopictureinpicture
-                />
+                <div>
+                    <h2 class="text-2xl font-semibold text-gray-900">
+                        Avec bouton
+                    </h2>
+                    <video
+                        ref="videoElement1"
+                        src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                        controls
+                    />
+                    <button
+                        type="button"
+                        class="mt-3 inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        @click="togglePictureInPicture"
+                    >
+                        Toggle Picture in picture
+                    </button>
+                </div>
+                <div class="mt-12">
+                    <h2 class="text-2xl font-semibold text-gray-900">
+                        Auto Picture in Picture
+                    </h2>
+                    <video
+                        ref="videoElement2"
+                        src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                        controls
+                        autopictureinpicture
+                    />
+                </div>
             </template>
         </api-template-vue>
     </div>

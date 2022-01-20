@@ -77,7 +77,7 @@ const exemples = [
         fn: () => console.countReset('ma fonction'),
     },
     {
-        code: `console.debut('debug')`,
+        code: `console.debug('debug')`,
         fn: () => console.debug('debug'),
     },
     {

@@ -2,14 +2,16 @@
     <div>
         <api-template-vue :title="title" :docUrl="docUrl" :useCases="useCases">
             <template v-slot:examples>
-                <GoogleMap
-                    api-key="AIzaSyAXDiSlaEOPnfKkPJ3oSwrJDMeh6MV3syk"
-                    style="width: 100%; height: 500px"
-                    :center="{ lat, lng }"
-                    :zoom="15"
-                >
-                    <Marker :options="{ position: { lat, lng } }" />
-                </GoogleMap>
+                <div>
+                    <GoogleMap
+                        api-key="AIzaSyAXDiSlaEOPnfKkPJ3oSwrJDMeh6MV3syk"
+                        style="width: 100%; height: 500px"
+                        :center="{ lat, lng }"
+                        :zoom="15"
+                    >
+                        <Marker :options="{ position: { lat, lng } }" />
+                    </GoogleMap>
+                </div>
             </template>
         </api-template-vue>
     </div>

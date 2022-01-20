@@ -14,6 +14,7 @@ export enum NomRoutes {
     ResizeObserverApi = 'resize-observer-api',
     GeolocationApi = 'geolocation-api',
     WebSpeechApi = 'web-speech-api',
+    ExerciceApi = 'exercice-api',
 }
 
 const routes: Array<RouteRecordRaw> = [
@@ -116,6 +117,14 @@ const routes: Array<RouteRecordRaw> = [
         component: () =>
             import(
                 /* webpackChunkName: "/web-speech-api" */ '../views/WebSpeechApi.vue'
+            ),
+    },
+    {
+        path: '/exercice-api',
+        name: NomRoutes.ExerciceApi,
+        component: () =>
+            import(
+                /* webpackChunkName: "/exercice-api" */ '../views/Exercice.vue'
             ),
     },
 ];

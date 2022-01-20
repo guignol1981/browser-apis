@@ -213,12 +213,12 @@ import { NomRoutes } from '@/router';
 
 const navigation = [
     {
-        name: 'Page Visibility API',
-        routeName: NomRoutes.PageVisibilityAPI,
-    },
-    {
         name: 'Console API',
         routeName: NomRoutes.ConsoleAPI,
+    },
+    {
+        name: 'Page Visibility API',
+        routeName: NomRoutes.PageVisibilityAPI,
     },
     {
         name: 'Fullscreen API',
@@ -247,6 +247,10 @@ const navigation = [
     {
         name: 'Picture in Picture API',
         routeName: NomRoutes.PictureInPictureApi,
+    },
+    {
+        name: 'Exercice API',
+        routeName: NomRoutes.ExerciceApi,
     },
     {
         name: 'Screen Orientation API',

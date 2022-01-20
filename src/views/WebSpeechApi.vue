@@ -2,19 +2,24 @@
     <div>
         <api-template-vue :title="title" :docUrl="docUrl" :useCases="useCases">
             <template v-slot:examples>
-                <div ref="square" class="h-32 w-32 bg-red-300"></div>
-                <h3 ref="hints" class="text-gray-700 text-xl"></h3>
-                <p
-                    ref="diagnostic"
-                    class="mt-2 text-blue-600 font-semibold"
-                ></p>
-                <button
-                    type="button"
-                    class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    @click="recognize"
-                >
-                    Donner une commande
-                </button>
+                <div>
+                    <h2 class="text-2xl font-semibold text-gray-700">
+                        Changer de couleur
+                    </h2>
+                    <div ref="square" class="h-32 w-32 bg-red-300"></div>
+                    <h3 ref="hints" class="text-gray-700 text-xl"></h3>
+                    <p
+                        ref="diagnostic"
+                        class="mt-2 text-blue-600 font-semibold"
+                    ></p>
+                    <button
+                        type="button"
+                        class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        @click="recognize"
+                    >
+                        Donner une commande
+                    </button>
+                </div>
             </template>
         </api-template-vue>
     </div>
