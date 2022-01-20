@@ -1,13 +1,29 @@
 <template>
     <div>
         <api-template-vue :title="title" :docUrl="docUrl" :useCases="useCases">
-            <template v-slot:examples> </template>
+            <template v-slot:examples>
+                <div ref="square" class="h-32 w-32 bg-red-300"></div>
+                <h3 ref="hints" class="text-gray-700 text-xl"></h3>
+                <p
+                    ref="diagnostic"
+                    class="mt-2 text-blue-600 font-semibold"
+                ></p>
+                <button
+                    type="button"
+                    class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    @click="recognize"
+                >
+                    Donner une commande
+                </button>
+            </template>
         </api-template-vue>
     </div>
 </template>
 
 <script>
 import ApiTemplateVue from '@/components/ApiTemplate.vue';
+import { ref } from '@vue/reactivity';
+import { onMounted } from '@vue/runtime-core';
 
 const title = 'Web Speech API';
 const docUrl =
@@ -22,10 +38,11 @@ export default {
         ApiTemplateVue,
     },
     setup() {
-        var SpeechRecognition = window.SpeechRecognition;
-        var SpeechGrammarList = window.SpeechGrammarList;
+        const square = ref(null);
+        const hints = ref(null);
+        const diagnostic = ref(null);
 
-        var colors = [
+        const colors = [
             'aqua',
             'azure',
             'beige',
@@ -74,13 +91,29 @@ export default {
             'white',
             'yellow',
         ];
-        var grammar =
+
+        const grammar =
             '#JSGF V1.0; grammar colors; public <color> = ' +
             colors.join(' | ') +
             ' ;';
 
+        let colorHTML = '';
+        colors.forEach(function (v, i) {
+            console.log(v, i);
+            colorHTML +=
+                '<span style="background-color:' + v + ';"> ' + v + ' </span>';
+        });
+
+        const SpeechRecognition =
+            SpeechRecognition || window.webkitSpeechRecognition;
+        const SpeechGrammarList =
+            SpeechGrammarList || window.webkitSpeechGrammarList;
+        const SpeechRecognitionEvent =
+            SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
+
         const recognition = new SpeechRecognition();
         const speechRecognitionList = new SpeechGrammarList();
+
         speechRecognitionList.addFromString(grammar, 1);
         recognition.grammars = speechRecognitionList;
         recognition.continuous = false;
@@ -88,22 +121,7 @@ export default {
         recognition.interimResults = false;
         recognition.maxAlternatives = 1;
 
-        const diagnostic = document.querySelector('.output');
-        const bg = document.querySelector('html');
-        const hints = document.querySelector('.hints');
-
-        var colorHTML = '';
-        colors.forEach(function (v, i) {
-            console.log(v, i);
-            colorHTML +=
-                '<span style="background-color:' + v + ';"> ' + v + ' </span>';
-        });
-        hints.innerHTML =
-            'Tap/click then say a color to change the background color of the app. Try ' +
-            colorHTML +
-            '.';
-
-        document.body.onclick = function () {
+        const recognize = () => {
             recognition.start();
             console.log('Ready to receive a color command.');
         };
@@ -117,28 +135,44 @@ export default {
             // These also have getters so they can be accessed like arrays.
             // The second [0] returns the SpeechRecognitionAlternative at position 0.
             // We then return the transcript property of the SpeechRecognitionAlternative object
-            var color = event.results[0][0].transcript;
+            const color = event.results[0][0].transcript;
+
             diagnostic.textContent = 'Result received: ' + color + '.';
-            bg.style.backgroundColor = color;
+            square.value.style.backgroundColor = color;
+
             console.log('Confidence: ' + event.results[0][0].confidence);
         };
 
         recognition.onspeechend = function () {
+            console.debug('end');
             recognition.stop();
         };
 
         recognition.onnomatch = function () {
-            diagnostic.textContent = "I didn't recognise that color.";
+            console.debug('match');
+            diagnostic.value.textContent = "I didn't recognise that color.";
         };
 
         recognition.onerror = function (event) {
+            console.debug('error');
             diagnostic.textContent =
                 'Error occurred in recognition: ' + event.error;
         };
+
+        onMounted(() => {
+            hints.value.innerHTML =
+                'Tap/click then say a color to change the background color of the app. Try ' +
+                colorHTML +
+                '.';
+        });
         return {
             title,
             docUrl,
             useCases,
+            square,
+            hints,
+            diagnostic,
+            recognize,
         };
     },
 };
